@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nutrition Tracker</title>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+  }
+
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 10px;
+    background: linear-gradient(100deg, #ffffff, #28bf96);
+  }
+
+  .container {
+    max-width: 500px;
+    width: 50%;
+    background-color: #fff;
+    border-color: (100deg, #ffffff, #9b59b6);
+    padding: 25px 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+    height: fit-content;
+  }
+
+  .container .title {
+    font-size: 25px;
+    font-weight: 500;
+    position: relative;
+  }
+
+  .container .title::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 3px;
+    width: 30px;
+    border-radius: 5px;
+    background: linear-gradient(100deg, #ffffff, #28bf96);
+  }
+
+  .content form .user-details {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 20px 0 12px 0;
+  }
+
+  form .user-details .input-box {
+    margin-bottom: 30px;
+    width: calc(100% / 2 - 20px);
+  }
+
+  form .input-box span.details {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 5px;
+  }
+
+  .user-details .input-box input {
+    height: 45px;
+    width: 100%;
+    outline: none;
+    font-size: 16px;
+    border-radius: 5px;
+    padding-left: 15px;
+    border: 1px solid #ccc;
+    border-bottom-width: 2px;
+    transition: all 0.3s ease;
+  }
+
+  .user-details .input-box input:focus,
+  .user-details .input-box input:valid {
+    border-color: #9b59b6;
+  }
+
+  form .button {
+    height: 45px;
+    margin: 35px 0;
+  }
+
+  form .button input {
+    height: 100%;
+    width: 100%;
+    border-radius: 5px;
+    border: none;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: linear-gradient(135deg, #71b7e6, #9b59b6);
+  }
+
+  form .button input:hover {
+    background: linear-gradient(-135deg, #71b7e6, #9b59b6);
+  }
+
+  
+  
+</style>
+</head>
+<body>
+<div class="container">
+<h1>Nutrition Tracker</h1>
+
+<form action="/add_food" method="post">
+  <div class="user-details">
+    <div class="input-box">
+      <span class="details">Name:</span>
+      <input type="text" id="name" name="name" required>
+    </div>
+    <div class="input-box">
+      <span class="details">Calories:</span>
+      <input type="number" id="calories" name="calories" required>
+    </div>
+    <div class="input-box">
+      <span class="details">Protein:</span>
+      <input type="number" id="proteins" name="proteins" required>
+    </div>
+    <div class="input-box">
+      <span class="details">Fats:</span>
+      <input type="number" id="fats" name="fats" required>
+    </div>
+    <div class="input-box">
+      <span class="details">Carbs:</span>
+      <input type="number" id="carbs" name="carbs" required>
+    </div>
+  </div>
+  <div class="button">
+    <button type="submit">Add Food</button>
+  </div>
+</form>
+<a href="/visualize"><button>Visualize Progress</button></a>
+
+</div>
+
+{% if today %}
+<h2>Today's Food:</h2>
+<ul>
+  {% for food in today %}
+  <li>{{ food.name }} - Calories: {{ food.calories }}, Protein: {{ food.proteins }}, Fats: {{ food.fats }}, Carbs: {{ food.carbs }}</li>
+  {% endfor %}
+</ul>
+{% endif %}
+</body>
+</html>

@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      .header {
+        width: 100%;
+        height: 100vh;
+        background: linear-gradient(170deg, #28bf96, #ffffff);
+        background-position: center;
+        background-size: cover;
+      }
+
+      .side-nav {
+        width: 110px;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        padding: 30px 15px;
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(5px);
+        display: flex;
+        flex-direction: column;
+        transition: width 0.5s;
+      }
+
+      .user {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 60%;
+        font-size: 20px;
+        padding: 10px;
+        border-radius: 8px;
+        margin-left: auto;
+        margin-right: auto;
+        overflow: hidden;
+      }
+
+      .user div {
+        display: none;
+      }
+
+      .user h2 {
+        font-size: 20px;
+        font-weight: 600;
+        white-space: nowrap;
+      }
+
+      .user-img {
+        width: 70px;
+        border-radius: 50%;
+        margin: auto;
+      }
+
+      .star-img {
+        width: 20px;
+        display: none;
+      }
+
+      ul {
+        list-style: none;
+        padding: 0 15px;
+      }
+
+      ul li {
+        margin: 30px 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+      }
+
+      ul li img {
+        width: 30px;
+        margin-right: 0px;
+      }
+
+      ul li p {
+        white-space: nowrap;
+        display: none;
+      }
+
+      .side-nav:hover {
+        width: 250px;
+      }
+
+      .side-nav:hover .user div {
+        display: block;
+      }
+
+      .side-nav:hover .user {
+        width: 100%;
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(5px);
+      }
+
+      .side-nav:hover .star-img {
+        display: block;
+      }
+
+      .side-nav:hover .user-img {
+        margin: 0px;
+      }
+
+      .side-nav:hover ul li p {
+        display: contents;
+      }
+
+      .side-nav:hover il li img {
+        margin-right: 10px;
+      }
+
+      .side-nav:hover ui li {
+        justify-content: flex-start;
+      }
+
+      .chat-container {
+        display: flex;
+        flex-direction: column;
+        margin-top: 20px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+      }
+
+      #chat-messages {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        max-height: 200px;
+        overflow-y: auto;
+      }
+
+      #chat-input {
+        margin-top: 10px;
+        padding: 5px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+
+      #send-button {
+        margin-top: 10px;
+        padding: 5px 10px;
+        background-color: #28bf96;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      /* New styles for cards */
+      .cards-container {
+        display: flex;
+        justify-content: space-around;
+        width: 1560px;
+        max-width: 1960px;
+        margin-left: 300px;
+      }
+
+      .card {
+        width: 50%;
+        padding: 20px;
+        background: linear-gradient(360deg, #dde1e0, hsl(33, 96%, 57%));
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin-top: 100px;
+        margin-left: 30px;
+
+        text-align: center;
+      }
+
+      .card h3 {
+        margin-bottom: 50px;
+        font-size: 24px;
+      }
+
+      .card p {
+        font-size: 20px;
+      }
+
+      upload-button {
+        margin-top: 50px;
+        padding: 10px 20px;
+        background-color: #28bf96;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      .upload-button:hover {
+        background-color: #1f8f6b;
+      }
+    </style>
+    <title>Admin Dashboard</title>
+  </head>
+  <body>
+    <div class="header">
+      <div class="side-nav">
+        <div class="user">
+          <img src="static/user.png" class="user-img" />
+          <div>
+            <h2>{{ greeting_message }}</h2>
+            <p>{{ username }}</p>
+          </div>
+          <img src="static/star.png" class="star-img" />
+        </div>
+        <ul>
+          <li>
+            <img src="static/dashboard.png" />
+            <p>Dashboard</p>
+          </li>
+          <li>
+            <img src="static/reports.png" />
+            <p>Reports</p>
+          </li>
+          <li>
+            <img src="static/rewards.png" />
+            <p>Rewards</p>
+          </li>
+          <li>
+            <img src="static/messages.png" />
+            <p>Message</p>
+          </li>
+          <li>
+            <img src="static/video-chat.png" /><a href="videocall"
+              ><p>Video chat</p></a
+            >
+          </li>
+          <li>
+            <img src="static/setting.png" />
+            <p>Setting</p>
+          </li>
+        </ul>
+        <ul>
+          <li>
+            <img src="static/logout.png" /><a href="{{ url_for('logout') }}"
+              ><p>Logout</p></a
+            >
+          </li>
+        </ul>
+      </div>
+
+      <!-- Cards for Advertising, E-Commerce, and Analytics -->
+      <div class="cards-container">
+        <div class="card">
+          <h3>Advertising</h3>
+          <p style="margin-bottom: 20px">Manage advertising campaigns</p>
+        </div>
+        <div class="card">
+          <h3>E-Commerce</h3>
+          <p>Manage online store and products</p>
+        </div>
+        <div class="card">
+          <h3>Analytics</h3>
+          <p>View website and sales analytics</p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

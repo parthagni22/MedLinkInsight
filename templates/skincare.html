@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skin Care Recommender</title>
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}"> -->
+    <style>body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+    }
+    
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    
+    h1 {
+        text-align: center;
+        color: #333;
+    }
+    
+    form {
+        margin-top: 20px;
+    }
+    
+    label {
+        display: block;
+        margin-bottom: 5px;
+        color: #555;
+    }
+    
+    input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+    }
+    
+    input[type="submit"] {
+        width: 100%;
+        padding: 10px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+    }
+    
+    ul {
+        list-style-type: none;
+        padding: 0;
+    }
+    
+    li {
+        margin-bottom: 10px;
+        background-color: #f9f9f9;
+        padding: 10px;
+        border-radius: 3px;
+    }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Skin Care Recommender</h1>
+        <form action="/recommendation" method="post">
+            <label for="skintone">Skin Tone:</label>
+            <input type="text" id="skintone" name="skintone"><br>
+            <label for="eyecolor">Eye Color:</label>
+            <input type="text" id="eyecolor" name="eyecolor"><br>
+            <label for="skintype">Skin Type:</label>
+            <input type="text" id="skintype" name="skintype"><br>
+            <label for="haircolor">Hair Color:</label>
+            <input type="text" id="haircolor" name="haircolor"><br><br>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+</body>
+</html>

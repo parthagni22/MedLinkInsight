@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Services</title>
+    <!-- Add any CSS stylesheets or other meta tags here -->
+</head>
+<body>
+    <h1>Our Services</h1>
+    
+    <!-- Display approved advertisements -->
+    <div class="advertisement-section">
+        <h2>Featured Advertisements</h2>
+        <div class="advertisement-list">
+            {% for advertisement in advertisements %}
+                <div class="advertisement-item">
+                    <img src="{{ advertisement.image_url }}" alt="Advertisement">
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Other content of the services page -->
+    <!-- Add more sections, content, or features as needed -->
+
+    <!-- Add any JavaScript scripts or other footer content here -->
+</body>
+</html>

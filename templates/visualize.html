@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualization</title>
+    
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background:linear-gradient(100deg,#28bf96,#ffffff);
+        }
+
+        img {
+            max-width: 200%; /* Make sure the image doesn't exceed its natural size */
+            max-height: 200vh; /* Limit the image height to the viewport height */
+        }
+    </style>
+</head>
+<body>
+    <h1>Visualization</h1>
+    <img src="data:image/png;base64,{{ plot_data }}" alt="Nutrition Progress">
+    
+    <a href="add_food">Add More Food</a> <!-- Link to add more food items -->
+    <br>
+    <a href="index">Back to Home</a>
+</body>
+</html>
