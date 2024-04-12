@@ -22,43 +22,37 @@
             border-radius: 10px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             padding: 40px;
-            width: 1250px;
+            max-width: 1200px;
             text-align: center;
             box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
         }
 
         .form-group {
-            gap:5;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* 4 columns */
+            gap: 10px;
             margin-bottom: 20px;
             text-align: left;
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            width: 100%;
             box-sizing: border-box;
             margin-bottom: 10px;
         }
 
-        .form-group label {
+        .column {
             flex: 1;
-            margin-right: 10px;
+        }
+
+        .form-group label {
             color: #666;
             margin-bottom: 10px;
+            display: block;
         }
 
         .form-group input[type="number"] {
-            flex: 1;
+            width: calc(100% - 20px); /* Adjusted width */
             padding: 10px;
             border-radius: 5px;
             border: 1px solid #ccc;
             box-sizing: border-box;
-        }
-
-        .column {
-            width: 50%;
         }
 
         input[type="submit"] {
@@ -84,12 +78,15 @@
         .result p {
             margin: 0;
         }
+        .marginn {
+            margin-top: 200px;
+        }
     </style>
 </head>
 
 <body>
     <div class="container">
-        <h1>Breast Cancer Diagnosis Prediction</h1>
+        <h1 class="marginn">Breast Cancer Diagnosis Prediction</h1>
         <form action="/b_cancer_model" method="post">
             <div class="form-group">
                 <div class="column">
@@ -97,60 +94,133 @@
                     <input type="number" id="mean_radius" name="mean_radius" placeholder="Enter Mean Radius">
                 </div>
                 <div class="column">
-                    <label for="mean_texture">Mean Texture:</label>
-                    <input type="number" id="mean_texture" name="mean_texture" placeholder="Enter Mean Texture">
+                    <label for="mean_radius">Mean Radius:</label>
+                    <input type="number" id="mean_radius" name="mean_radius" placeholder="Enter Mean Radius">
                 </div>
                 <div class="column">
                     <label for="mean_radius">Mean Radius:</label>
                     <input type="number" id="mean_radius" name="mean_radius" placeholder="Enter Mean Radius">
                 </div>
                 <div class="column">
-                    <label for="mean_texture">Mean Texture:</label>
-                    <input type="number" id="mean_texture" name="mean_texture" placeholder="Enter Mean Texture">
+                    <label for="mean_radius">Mean Radius:</label>
+                    <input type="number" id="mean_radius" name="mean_radius" placeholder="Enter Mean Radius">
                 </div>
                 <div class="column">
                     <label for="mean_radius">Mean Radius:</label>
                     <input type="number" id="mean_radius" name="mean_radius" placeholder="Enter Mean Radius">
                 </div>
                 <div class="column">
+                    <label for="mean_radius">Mean Radius:</label>
+                    <input type="number" id="mean_radius" name="mean_radius" placeholder="Enter Mean Radius">
+                </div>
+                <div class="column">
+                    <label for="mean_radius">Mean Radius:</label>
+                    <input type="number" id="mean_radius" name="mean_radius" placeholder="Enter Mean Radius">
+                </div>
+                <div class="column">
+                    <label for="mean_radius">Mean Radius:</label>
+                    <input type="number" id="mean_radius" name="mean_radius" placeholder="Enter Mean Radius">
+                </div>
+
+                <div class="column">
                     <label for="mean_texture">Mean Texture:</label>
                     <input type="number" id="mean_texture" name="mean_texture" placeholder="Enter Mean Texture">
                 </div>
+                <div class="column">
+                    <label for="mean_texture">Mean Texture:</label>
+                    <input type="number" id="mean_texture" name="mean_texture" placeholder="Enter Mean Texture">
+                </div>
+                 <div class="column">
+                    <label for="mean_texture">Mean Texture:</label>
+                    <input type="number" id="mean_texture" name="mean_texture" placeholder="Enter Mean Texture">
+                </div>
+                <div class="column">
+                    <label for="mean_texture">Mean Texture:</label>
+                    <input type="number" id="mean_texture" name="mean_texture" placeholder="Enter Mean Texture">
+                </div>
+                 <div class="column">
+                    <label for="mean_texture">Mean Texture:</label>
+                    <input type="number" id="mean_texture" name="mean_texture" placeholder="Enter Mean Texture">
+                </div>
+                <div class="column">
+                    <label for="mean_texture">Mean Texture:</label>
+                    <input type="number" id="mean_texture" name="mean_texture" placeholder="Enter Mean Texture">
+                </div>
+                <div class="column">
+                    <label for="mean_texture">Mean Texture:</label>
+                    <input type="number" id="mean_texture" name="mean_texture" placeholder="Enter Mean Texture">
+                </div>
+                <div class="column">
+                    <label for="mean_texture">Mean Texture:</label>
+                    <input type="number" id="mean_texture" name="mean_texture" placeholder="Enter Mean Texture">
+                </div>
+                <div class="column">
+                    <label for="mean_texture">Mean Texture:</label>
+                    <input type="number" id="mean_texture" name="mean_texture" placeholder="Enter Mean Texture">
+                </div>
+                <div class="column">
+                    <label for="mean_texture">Mean Texture:</label>
+                    <input type="number" id="mean_texture" name="mean_texture" placeholder="Enter Mean Texture">
+                </div>
+                <div class="column">
+                    <label for="mean_texture">Mean Texture:</label>
+                    <input type="number" id="mean_texture" name="mean_texture" placeholder="Enter Mean Texture">
+                </div>
+                 <div class="column">
+                    <label for="mean_texture">Mean Texture:</label>
+                    <input type="number" id="mean_texture" name="mean_texture" placeholder="Enter Mean Texture">
+                </div>
+
+                <div class="column">
+                    <label for="mean_perimeter">Mean Perimeter:</label>
+                    <input type="number" id="mean_perimeter" name="mean_perimeter" placeholder="Enter Mean Perimeter">
+                </div>
+                <div class="column">
+                    <label for="mean_perimeter">Mean Perimeter:</label>
+                    <input type="number" id="mean_perimeter" name="mean_perimeter" placeholder="Enter Mean Perimeter">
+                </div>
+                <div class="column">
+                    <label for="mean_perimeter">Mean Perimeter:</label>
+                    <input type="number" id="mean_perimeter" name="mean_perimeter" placeholder="Enter Mean Perimeter">
+                </div>
+                <div class="column">
+                    <label for="mean_perimeter">Mean Perimeter:</label>
+                    <input type="number" id="mean_perimeter" name="mean_perimeter" placeholder="Enter Mean Perimeter">
+                </div>
+
+                <div class="column">
+                    <label for="mean_area">Mean Area:</label>
+                    <input type="number" id="mean_area" name="mean_area" placeholder="Enter Mean Area">
+                </div>
+                 <div class="column">
+                    <label for="mean_area">Mean Area:</label>
+                    <input type="number" id="mean_area" name="mean_area" placeholder="Enter Mean Area">
+                </div>
+                <div class="column">
+                    <label for="mean_area">Mean Area:</label>
+                    <input type="number" id="mean_area" name="mean_area" placeholder="Enter Mean Area">
+                </div>
+                 <div class="column">
+                    <label for="mean_area">Mean Area:</label>
+                    <input type="number" id="mean_area" name="mean_area" placeholder="Enter Mean Area">
+                </div>
+                <div class="column">
+                    <label for="mean_area">Mean Area:</label>
+                    <input type="number" id="mean_area" name="mean_area" placeholder="Enter Mean Area">
+                </div>
+                 <div class="column">
+                    <label for="mean_area">Mean Area:</label>
+                    <input type="number" id="mean_area" name="mean_area" placeholder="Enter Mean Area">
+                </div>
+
+
+                <!-- Add more input fields for each column as needed -->
             </div>
-
-            <div class="form-group">
-                <div class="column">
-                    <label for="mean_perimeter">Mean Perimeter:</label>
-                    <input type="number" id="mean_perimeter" name="mean_perimeter" placeholder="Enter Mean Perimeter">
-                </div>
-                <div class="column">
-                    <label for="mean_area">Mean Area:</label>
-                    <input type="number" id="mean_area" name="mean_area" placeholder="Enter Mean Area">
-                </div>
-                <div class="column">
-                    <label for="mean_perimeter">Mean Perimeter:</label>
-                    <input type="number" id="mean_perimeter" name="mean_perimeter" placeholder="Enter Mean Perimeter">
-                </div>
-                <div class="column">
-                    <label for="mean_area">Mean Area:</label>
-                    <input type="number" id="mean_area" name="mean_area" placeholder="Enter Mean Area">
-                </div>
-                <div class="column">
-                    <label for="mean_perimeter">Mean Perimeter:</label>
-                    <input type="number" id="mean_perimeter" name="mean_perimeter" placeholder="Enter Mean Perimeter">
-                </div>
-                <div class="column">
-                    <label for="mean_area">Mean Area:</label>
-                    <input type="number" id="mean_area" name="mean_area" placeholder="Enter Mean Area">
-                </div>
-            </div>
-
-            <!-- Add more input fields for other features as needed -->
-
+            <!-- Add more form-groups for each row of inputs as needed -->
             <input type="submit" value="Predict">
         </form>
         <div class="result">
-            <p>{{ diagnosis }}</p>
+            <p>{{ output }}</p>
             <!-- Result will be displayed here -->
         </div>
     </div>

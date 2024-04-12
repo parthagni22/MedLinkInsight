@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Disease Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(170deg, #28bf96, #ffffff);
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .input-container {
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 10px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="number"] {
+            width: 80%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        input[type="range"] {
+            width: 20%;
+            margin-left: 5px;
+            /* margin-bottom: 10px; */
+            background-color: orange;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background: linear-gradient(135deg, #71b7e6, #9b59b6);
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background: linear-gradient(-135deg, #71b7e6, #9b59b6);
+        }
+
+        .result {
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Heart Disease Prediction</h1>
+        <form action="/predict" method="post">
+            <div class="input-container">
+                <div class="form-group">
+                    <label for="age">Age:</label>
+                    <input type="range" id="ageRange" min="1" max="100" value="25" oninput="updateTextInput(this.value, 'age')">
+
+                    <input type="number" name="age" id="age" value="25" min="1" max="100">
+                </div>
+                <div class="form-group">
+                    <label for="sex">Gender (F=0, M=1):</label>
+                    <input type="range" id="sexRange" min="0" max="1" value="1" oninput="updateTextInput(this.value, 'sex')">
+
+                    <input type="number" name="sex" id="sex" value="1" min="0" max="1">
+                </div>
+                <div class="form-group">
+                    <label for="cp">Chest Pain Types:</label>
+                    <input type="range" id="cpRange" min="0" max="3" value="1" oninput="updateTextInput(this.value, 'cp')">
+
+                    <input type="number" name="cp" id="cp" value="1" min="0" max="3">
+                </div>
+                <div class="form-group">
+                    <label for="trestbps">Resting Blood Pressure (mm Hg):</label>
+                    <input type="range" id="trestbpsRange" min="0" max="250" value="120" oninput="updateTextInput(this.value, 'trestbps')">
+
+                    <input type="number" name="trestbps" id="trestbps" value="120" min="0" max="250">
+                </div>
+                <div class="form-group">
+                    <label for="chol">Serum Cholestoral (mg/dl):</label>
+                    <input type="range" id="cholRange" min="0" max="600" value="200" oninput="updateTextInput(this.value, 'chol')">
+
+                    <input type="number" name="chol" id="chol" value="200" min="0" max="600">
+                </div>
+                <div class="form-group">
+                    <label for="fbs">Fasting Blood Sugar (mg/dl):</label>
+                    <input type="range" id="fbsRange" min="0" max="1" value="0" oninput="updateTextInput(this.value, 'fbs')">
+
+                    <input type="number" name="fbs" id="fbs" value="0" min="0" max="1">
+                </div>
+                <div class="form-group">
+                    <label for="restecg">Resting Electrocardiographic Results:</label>
+                    <input type="range" id="restecgRange" min="0" max="2" value="0" oninput="updateTextInput(this.value, 'restecg')">
+
+                    <input type="number" name="restecg" id="restecg" value="0" min="0" max="2">
+                </div>
+                <div class="form-group">
+                    <label for="thalach">Maximum Heart Rate Achieved:</label>
+                    <input type="range" id="thalachRange" min="70" max="220" value="150" oninput="updateTextInput(this.value, 'thalach')">
+
+                    <input type="number" name="thalach" id="thalach" value="150" min="70" max="220">
+                </div>
+                <div class="form-group">
+                    <label for="exang">Exercise Induced Angina:</label>
+                    <input type="range" id="exangRange" min="0" max="1" value="0" oninput="updateTextInput(this.value, 'exang')">
+
+                    <input type="number" name="exang" id="exang" value="0" min="0" max="1">
+                </div>
+                <div class="form-group">
+                    <label for="oldpeak">ST Depression Induced by Exercise:</label>
+                    <input type="range" id="oldpeakRange" min="0" max="7" value="0" oninput="updateTextInput(this.value, 'oldpeak')">
+
+                    <input type="number" name="oldpeak" id="oldpeak" value="0" min="0" max="7">
+                </div>
+                <div class="form-group">
+                    <label for="slope">Slope of the Peak Exercise ST Segment:</label>
+                    <input type="range" id="slopeRange" min="0" max="2" value="0" oninput="updateTextInput(this.value, 'slope')">
+
+                    <input type="number" name="slope" id="slope" value="0" min="0" max="2">
+                </div>
+                <div class="form-group">
+                    <label for="ca">Number of Major Vessels Colored by Flourosopy:</label>
+                    <input type="range" id="caRange" min="0" max="4" value="0" oninput="updateTextInput(this.value, 'ca')">
+
+                    <input type="number" name="ca" id="ca" value="0" min="0" max="4">
+                </div>
+                <div class="form-group">
+                    <label for="thal">Thal:</label>
+                    <input type="range" id="thalRange" min="0" max="3" value="1" oninput="updateTextInput(this.value, 'thal')">
+                    <input type="number" name="thal" id="thal" value="1" min="0" max="3">
+                </div>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+        <div class="result">
+            <p>{{ output }}</p>
+            <!-- Result will be displayed here -->
+        </div>
+    </div>
+
+    <script>
+        function updateTextInput(val, fieldId) {
+            document.getElementById(fieldId).value = val;
+        }
+    </script>
+</body>
+
+</html>

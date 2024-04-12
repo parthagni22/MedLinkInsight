@@ -332,7 +332,127 @@ def dib_prediction():
     return render_template('dibpredict.html')
 
 
-#-------------------------------- B. Cancer___________
+#-------------------------------- B. Cancer----------------
+with open("B_cancer_model.pkl","rb") as f:
+    bmodel = pickle.load(f)
+@app.route("/b_cancer_model", methods=["POST"])
+def b_cancer_model():
+    if request.method =="POST":
+        # Get user input from the form
+        mean_radius = float(request.form['mean_radius'])
+        mean_texture = float(request.form['mean_texture'])
+        mean_perimeter = float(request.form['mean_perimeter'])
+        mean_area = float(request.form['mean_area'])
+        mean_smoothness = float(request.form['mean_smoothness'])
+        mean_compactness = float(request.form['mean_compactness'])
+        mean_concavity = float(request.form['mean_concavity'])
+        mean_concave_points = float(request.form['mean_concave_points'])
+        mean_symmetry = float(request.form['mean_symmetry'])
+        mean_fractal_dimension = float(request.form['mean_fractal_dimension'])
+        radius_error = float(request.form['radius_error'])
+        texture_error = float(request.form['texture_error'])
+        perimeter_error = float(request.form['perimeter_error'])
+        area_error = float(request.form['area_error'])
+        smoothness_error = float(request.form['smoothness_error'])
+        compactness_error = float(request.form['compactness_error'])
+        concavity_error = float(request.form['concavity_error'])
+        concave_points_error = float(request.form['concave_points_error'])
+        symmetry_error = float(request.form['symmetry_error'])
+        fractal_dimension_error = float(request.form['fractal_dimension_error'])
+        worst_radius = float(request.form['worst_radius'])
+        worst_texture = float(request.form['worst_texture'])
+        worst_perimeter = float(request.form['worst_perimeter'])
+        worst_area = float(request.form['worst_area'])
+        worst_smoothness = float(request.form['worst_smoothness'])
+        worst_compactness = float(request.form['worst_compactness'])
+        worst_concavity = float(request.form['worst_concavity'])
+        worst_concave_points = float(request.form['worst_concave_points'])
+        worst_symmetry = float(request.form['worst_symmetry'])
+        worst_fractal_dimension = float(request.form['worst_fractal_dimension'])
+
+        user_data = pd.DataFrame({
+            'mean_radius': [mean_radius],
+            'mean_texture': [mean_texture],
+            'mean_perimeter': [mean_perimeter],
+            'mean_area': [mean_area],
+            'mean_smoothness': [mean_smoothness],
+            'mean_compactness': [mean_compactness],
+            'mean_concavity': [mean_concavity],
+            'mean_concave_points': [mean_concave_points],
+            'mean_symmetry': [mean_symmetry],
+            'mean_fractal_dimension': [mean_fractal_dimension],
+            'radius_error': [radius_error],
+            'texture_error': [texture_error],
+            'perimeter_error': [perimeter_error],
+            'area_error': [area_error],
+            'smoothness_error': [smoothness_error],
+            'compactness_error': [compactness_error],
+            'concavity_error': [concavity_error],
+            'concave_points_error': [concave_points_error],
+            'symmetry_error': [symmetry_error],
+            'fractal_dimension_error': [fractal_dimension_error],
+            'worst_radius': [worst_radius],
+            'worst_texture': [worst_texture],
+            'worst_perimeter': [worst_perimeter],
+            'worst_area': [worst_area],
+            'worst_smoothness': [worst_smoothness],
+            'worst_compactness': [worst_compactness],
+            'worst_concavity': [worst_concavity],
+            'worst_concave_points': [worst_concave_points],
+            'worst_symmetry': [worst_symmetry],
+            'worst_fractal_dimension': [worst_fractal_dimension]
+
+        })
+
+        # Get the prediction
+        user_result = bmodel.predict(user_data)
+        if user_result[0] ==0:
+            output = "Malignantic"
+        else:
+            output = "Benign"
+    return render_template('b_cancer_model.html', output=output)
+
+@app.route("/b_cancer_model.html")
+def b_cancer_prediction():
+    return render_template('b_cancer_model.html')
+
+#---------------------------------- C. Heart Disease---------------------------
+with open("hrt_model.pkl","rb") as f:
+    hmodel = pickle.load(f)
+@app.route("/heart_model", methods=["POST"])
+def heart_model():
+    if request.method =="POST":
+
+        age = int(request.form['age'])
+        sex = int(request.form['sex'])
+        cp = int(request.form['cp'])
+        trestbps = int(request.form['trestbps'])
+        chol = int(request.form['chol'])
+        fbs = int(request.form['fbs'])
+        restecg = int(request.form['restecg'])
+        thalach = int(request.form['thalach'])
+        exang = int(request.form['exang'])
+        oldpeak = float(request.form['oldpeak'])
+        slope = int(request.form['slope'])
+        ca = int(request.form['ca'])
+        thal = int(request.form['thal'])
+
+        user_data = [[age, sex, cp, trestbps, chol, fbs, restecg, thalach, exang, oldpeak, slope, ca, thal]]
+        prediction= hmodel.predict(user_data)
+
+        if prediction[0] == 0:
+            output = "You are Healthy"
+        else:
+            output = "Heart Disease Ditected"
+    return render_template('hrt_disease.html', output=output)
+
+@app.route('/hrt_disease.html')
+def hrt_prediction():
+    return render_template('hrt_disease.html')
+
+
+
+
 
 
 
