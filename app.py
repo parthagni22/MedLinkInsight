@@ -42,7 +42,7 @@ def add_cache_control(response):
 def login():
     if 'username' in session:
         return redirect(url_for('dashboard'))
-    
+
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
@@ -55,7 +55,7 @@ def login():
             return redirect(url_for('dashboard'))
         else:
             flash('Invalid username or password', 'error')
-    
+
     return render_template('login.html')
 
 # -------------------  Registration --------------------------
@@ -103,7 +103,7 @@ def admin_login():
         # Check if user is an admin
         if username == ADMIN_USERNAME and password == ADMIN_PASSWORD:
             session['username'] = username
-            session['is_admin'] = True
+            session['password'] = True
             return redirect(url_for('admin_dashboard'))
 
         # Check if user exists in the database
@@ -115,7 +115,7 @@ def admin_login():
             return redirect(url_for('index'))
 
         flash('Invalid username or password', 'error')
-    
+
     return render_template('login.html')
 
 # ----------------------- ADMIN DASHBOARD --------------------------------
@@ -176,7 +176,7 @@ def upload_image():
 
 # ---------------------------- BLOG ROUTE ----------------------------------
 @app.route('/blog')
-def blog_route():    
+def blog_route():
     return render_template('blog.html')
 
 # ------------------------ DASHBOARD ---------------------------------------
@@ -304,25 +304,28 @@ def predict():
         return render_template('dibpre.html', result=result)
     return render_template('dibpre.html', result=None)
 
+#----------------------------------------B. Cancer--------------------------------------------------------
+
+
 # ---------------------- NEWS APP ----------------------------------------
 @app.route('/newsapp')
 def newsapp():
     page = int(request.args.get('page', 1))  # Get the page number from query parameters
     start_index = (page - 1) * PAGE_SIZE
     end_index = start_index + PAGE_SIZE
-    
+
     # Fetch top Headlines
     url = f'https://newsapi.org/v2/top-headlines?language=en&category=health&apiKey={NEWS_API_KEY}'
     response = requests.get(url)
     data = response.json()
     articles = data['articles']
-    
+
     # Paginate articles
     paginated_articles = articles[start_index:end_index]
-    
+
     num_articles = len(articles)
     num_pages = num_articles // PAGE_SIZE + (1 if num_articles % PAGE_SIZE > 0 else 0)
-    
+
     return render_template('newsapp.html', articles=paginated_articles, num_articles=num_articles, num_pages=num_pages, current_page=page)
 
 # ------------------------- HOME PAGE -------------------------------------

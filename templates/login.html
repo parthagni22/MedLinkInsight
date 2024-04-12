@@ -27,6 +27,7 @@
     }
     
     input {
+        display: flex;
         width: 100%;
         padding: 10px;
         margin-bottom: 15px;
@@ -34,6 +35,9 @@
         border-color: #9b59b6
     }
     
+    .labell {
+        display: flex;
+    }
     
     button {
         background-color: #4caf50;
@@ -59,11 +63,15 @@
             <label for="password">Password:</label>
             <input type="password" name="password" required>
             <label for="user_type">Login as:</label>
-            <input type="radio" name="user_type" value="patient" checked> Patient
-            <input type="radio" name="user_type" value="admin"> Admin
-
+            
+            <select name="user_type" id="user_type">
+                <option value="patient">Patient</option>
+                <option value="admin">Admin</option>
+            </select>
+            
             <button type="submit">Login</button>
         </form>
+        
     </div>
 </body>
 </html>

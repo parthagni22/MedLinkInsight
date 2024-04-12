@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/login.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <h2 class="login-title">Log in</h2>
+    
+        <form class="login-form" action="{{ url_for('login') }}" method="post">
+          <div>
+            <label for="name">Name </label>
+            <input
+                   id="username"
+                   type="text"
+                   placeholder="Eren Buruk"
+                   name="username"
+                   required
+                   />
+          </div>
+    
+          
+    
+          <div>
+            <label for="password">Password </label>
+            <input
+                   id="password"
+                   type="password"
+                   placeholder="password"
+                   name="password"
+                   required
+                   />
+          </div>
+          
+          <div>
+            <input type="radio" id="admin" name="role" value="admin">
+            <label for="admin">Admin</label>
+            <input type="radio" id="user" name="role" value="user" checked>
+            <label for="user">User</label>
+          </div>
+
+          <button class="btn btn--form" type="submit" value="Log in">
+            Log in
+          </button>
+        </form>
+    </div>
+</body>
+</html>

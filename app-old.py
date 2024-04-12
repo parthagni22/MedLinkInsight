@@ -9,6 +9,8 @@ import base64
 import pandas as pd
 from sklearn.metrics.pairwise import linear_kernel
 from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.ensemble import RandomForestClassifier
+
 
 from flaskext.mysql import MySQL
 import requests
@@ -101,12 +103,14 @@ def dashboard():
     if 'logged_in' not in session or not session['logged_in']:
         # If not logged in, redirect to the login page
         return redirect(url_for('login'))
-    
+
     # Check if the user is a patient
     if session['user_type'] == 'patient':
+        greeting_message = "Welcome to Dashboard"
+        username = "User"
         # Render the patient dashboard template
-        return render_template('dashboard.html')
-    
+        return render_template('dashboard.html',greeting_message=greeting_message, username=username)
+
     # # If the user is an admin, redirect to the admin dashboard
     # return redirect(url_for('admin_dashboard'))
 
@@ -117,12 +121,12 @@ def admin_dashboard():
     if 'logged_in' not in session or not session['logged_in']:
         # If not logged in, redirect to the login page
         return redirect(url_for('login'))
-    
+
     # Check if the user is an admin
     if session['user_type'] == 'admin':
         # Render the admin dashboard template
         return render_template('admin_dashboard.html')
-    
+
     # # If the user is not an admin, redirect to the patient dashboard
     # return redirect(url_for('dashboard'))
 
@@ -138,7 +142,7 @@ def logout():
 
 
 @app.route('/blog')
-def blog_rout():    
+def blog_rout():
     # Fetch images
     images = advertisements_collection.find()
     return render_template('blog.html', images=images)
@@ -153,7 +157,7 @@ def upload_advertisement():
         if 'advertisement_image' not in request.files:
             flash('No file part')
             return redirect(request.url)
-        
+
         file = request.files['advertisement_image']
 
         # If the user does not select a file, the browser submits an empty file without a filename
@@ -168,8 +172,8 @@ def upload_advertisement():
             return redirect(url_for('admin_dashboard'))
 
 
-    
-    
+
+
 # ------------------------------ Calorie Tracker --------------------------------
 CALORIE_GOAL_LIMIT = 3000
 PROTEIN_GOAL = 180
@@ -284,41 +288,53 @@ def videoCall():
 
 
 #------------------------------- Dib. prediction---------------------------
-
-# Load the diabetes prediction model
-
-import joblib
-
-# Load the saved SVM classifier model
-classifier = joblib.load('svm_diabetes_classifier.sav')
-scaler = joblib.load('scaler.sav')
-
-# with open('diabetes_classifier_svm.pkl', 'rb') as file:
-#     classifier = pickle.load(file)
-
-@app.route('/predict', methods=['GET','POST'])
+with open("Dib_model.pkl","rb") as f:
+    model = pickle.load(f)
+@app.route("/predict", methods=["POST"])
 def predict():
-    if request.method == 'POST':
-        input_data = request.form.values()
-        input_data_as_numpy_array = np.array(input_data).astype(float)
-        input_data_reshaped = input_data_as_numpy_array.reshape(1, -1)
-        std_data = scaler.transform(input_data_reshaped)
-        prediction = classifier.predict(std_data)
-        if prediction[0] == 0:
-            result = 'The person is not diabetic'
+    if request.method == "POST":
+        # Get user input from the form
+        Pregnancies = int(request.form["Pregnancies"])
+        Glucose = int(request.form["Glucose"])
+        BloodPressure = int(request.form["BloodPressure"])
+        SkinThickness = int(request.form["SkinThickness"])
+        Insulin = int(request.form["Insulin"])
+        BMI = float(request.form["BMI"])
+        DiabetesPedigreeFunction = float(request.form["DiabetesPedigreeFunction"])
+        Age = int(request.form["Age"])
+
+        # Create a DataFrame with the user input
+        user_data = pd.DataFrame({
+            "Pregnancies": [Pregnancies],
+            "Glucose": [Glucose],
+            "BloodPressure": [BloodPressure],
+            "SkinThickness": [SkinThickness],
+            "Insulin": [Insulin],
+            "BMI": [BMI],
+            "DiabetesPedigreeFunction": [DiabetesPedigreeFunction],
+            "Age": [Age]
+        })
+
+        # Get the prediction
+        user_result = model.predict(user_data)
+
+        # Determine the output message
+        if user_result[0] == 0:
+            output = "Great Non - Dibetic!!"
         else:
-            result = 'The person is diabetic'
-        return render_template('dibpre.html', result=result)
-    # If the request method is GET, return the predict form
-    return render_template('dibpre.html', result=None)
+            output = "You are Dibetic"
+
+        # Render the result page with the output message
+    return render_template('dibpredict.html', output=output)
+
+@app.route('/dibpredict.html')
+def dib_prediction():
+    return render_template('dibpredict.html')
 
 
-        #return render_template('dibpre.html', result=result)
-    
-    # If the request method is not POST, return an empty response
-    
-   
-    # return render_template("dibpre.html")
+#-------------------------------- B. Cancer___________
+
+
 
 # --------------------------------------------- News App---------------------------------------------
 
@@ -330,19 +346,19 @@ def newsapp():
     page = int(request.args.get('page', 1))  # Get the page number from query parameters
     start_index = (page - 1) * PAGE_SIZE
     end_index = start_index + PAGE_SIZE
-    
+
     # Fetch top Headlines
     url = f'https://newsapi.org/v2/top-headlines?language=en&category=health&apiKey={NEWS_API_KEY}'
     response = requests.get(url)
     data = response.json()
     articles = data['articles']
-    
+
     # Paginate articles
     paginated_articles = articles[start_index:end_index]
-    
+
     num_articles = len(articles)
     num_pages = num_articles // PAGE_SIZE + (1 if num_articles % PAGE_SIZE > 0 else 0)
-    
+
     return render_template('newsapp.html', articles=paginated_articles, num_articles=num_articles, num_pages=num_pages, current_page=page)
 
 @app.route('/')
@@ -356,4 +372,4 @@ def services():
 
 
 if __name__ == '__main__':
-    app.run(debug=True) 
+    app.run(debug=True)
