@@ -280,6 +280,7 @@ def recommendations():
     return render_template('recommendation.html', recommendations=recommendations)
 
 
+
 # ---------------------------- Video Calling -----------------------------------------------
 @app.route('/videocall')
 def videoCall():
