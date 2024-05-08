@@ -279,6 +279,10 @@ def recommendations():
     recommendations = recommend_products_by_user_features(skintone, eyecolor, skintype, haircolor)
     return render_template('recommendation.html', recommendations=recommendations)
 
+@app.route('/recommendation.html')
+def pro_recommendation():
+    return render_template('recommendation.html')
+
 
 
 # ---------------------------- Video Calling -----------------------------------------------
