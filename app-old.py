@@ -288,7 +288,7 @@ def pro_recommendation():
 # ---------------------------- Video Calling -----------------------------------------------
 @app.route('/videocall')
 def videoCall():
-    return render_template('videocall.html')
+    return render_template('WEB_UIKITS.html')
 
 
 
@@ -490,9 +490,70 @@ def newsapp():
 def index():
     return render_template('index.html')
 
+@app.route('/about')
+def about():
+    return render_template('v2.html')
+
 @app.route('/services')
 def services():
     return render_template('services.html')
+
+@app.route('/payment')
+def payment():
+    return render_template('payment.html')
+
+
+#------------------------------------------- Purchase Store --------------------------------
+# Sample data for products
+products = [
+    {"id": 1, "name": "Shlseido's Spray", "description": "Spray contained UV-3 Protection", "image": "picture4.png", "price": 10},
+    {"id": 2, "name": "Bio cuel", "description": "Glow Boosting Face Oil", "image": "MIDNIGHT.png", "price": 20},
+    {"id": 3, "name": "neude", "description": "Neude's Milk base Cream", "image": "neude.png", "price": 20},
+    {"id": 4, "name": "Nuska", "description": "Skin Rejuvenating Hyd. Surge", "image": "nuska.png", "price": 60},
+    {"id": 5, "name": "Detox Charcole", "description": "Charcole Soap by Hot Habit", "image": "soap.png", "price": 20},
+    {"id": 6, "name": "Minimalist Cleanser", "description": "Cleanser contained Salicylic Acid", "image": "picture3.png", "price": 20},
+
+
+
+
+
+    # Add more products here
+]
+
+@app.route('/products')
+def product_list():
+    return render_template('products.html', products=products)
+
+@app.route('/cart', methods=['GET', 'POST'])
+def cart():
+    if 'cart' not in session:
+        session['cart'] = []
+
+    if request.method == 'POST':
+        product_id = int(request.form['product_id'])
+        quantity = int(request.form['quantity'])
+        product = next((p for p in products if p['id'] == product_id), None)
+        if product:
+            item = {'id': product['id'], 'name': product['name'], 'price': product['price'], 'quantity': quantity}
+            # Check if session['cart'] is a list before appending
+            if isinstance(session['cart'], list):
+                session['cart'].append(item)
+            else:
+                # If not a list, initialize it as a list and then append
+                session['cart'] = [item]
+    # Calculate total price for each item in the cart
+    for item in session['cart']:
+        item['total_price'] = item['price'] * item['quantity']
+
+    return render_template('cart.html', cart=session['cart'])
+
+@app.route('/remove_from_cart', methods=['POST'])
+def remove_from_cart():
+    if 'cart' in session:
+        product_id = int(request.form['product_id'])
+        session['cart'] = [item for item in session['cart'] if item['id'] != product_id]
+
+    return redirect('/cart')
 
 
 

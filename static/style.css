@@ -1,0 +1,133 @@
+/* Global styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    background-color: #333;
+    overflow: hidden;
+}
+
+nav ul li {
+    float: left;
+}
+
+nav ul li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+nav ul li a:hover {
+    background-color: #111;
+}
+
+h1 {
+    text-align: center;
+}
+
+/* Product page */
+.products {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.product {
+    width: 300px;
+    margin: 20px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    text-align: center;
+}
+
+.product img {
+    width: 80%;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.product h2 {
+    font-size: 1.2em;
+    margin-bottom: 5px;
+}
+
+.product p {
+    margin-bottom: 10px;
+}
+
+.product form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.product form label {
+    margin-right: 5px;
+}
+
+.product form input[type="number"] {
+    width: 50px;
+    padding: 5px;
+    text-align: center;
+}
+
+.product form button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.product form button:hover {
+    background-color: #45a049;
+}
+
+/* Cart page */
+.cart {
+    margin-top: 20px;
+}
+
+.cart-item {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+    background-color: #f9f9f9;
+}
+
+.cart-item h2 {
+    font-size: 1.2em;
+    margin-bottom: 5px;
+}
+
+.cart-item p {
+    margin-bottom: 5px;
+}
+
+.cart-item button {
+    background-color: #f44336;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.cart-item button:hover {
+    background-color: #d32f2f;
+}

@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
     <style>
       * {
         margin: 0;
@@ -160,31 +161,63 @@
       .cards-container {
         display: flex;
         justify-content: space-around;
-        width: 1560px;
-        max-width: 1960px;
+        width: 100%;
+        max-width: 1600px;
         margin-left: 300px;
+        height: 400px;
       }
 
       .card {
         width: 50%;
-        padding: 20px;
+        padding: 30px;
         background: linear-gradient(360deg, #dde1e0, hsl(33, 96%, 57%));
         border-radius: 8px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        margin-top: 100px;
-        margin-left: 30px;
-
+        margin: 20px;
         text-align: center;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 300px;
       }
 
+      
+
       .card h3 {
-        margin-bottom: 50px;
-        font-size: 24px;
+        margin-bottom: 100px;
+        font-size: 25px;
       }
 
       .card p {
-        font-size: 20px;
+        font-size: 25px;
+        
       }
+
+      .button-33 {
+          background-color: #c2fbd7;
+          border-radius: 100px;
+          box-shadow: rgba(44, 187, 99, .2) 0 -25px 18px -14px inset,rgba(44, 187, 99, .15) 0 1px 2px,rgba(44, 187, 99, .15) 0 2px 4px,rgba(44, 187, 99, .15) 0 4px 8px,rgba(44, 187, 99, .15) 0 8px 16px,rgba(44, 187, 99, .15) 0 16px 32px;
+          color: green;
+          cursor: pointer;
+          display: inline-block;
+          font-family: CerebriSans-Regular,-apple-system,system-ui,Roboto,sans-serif;
+          padding: 7px 20px;
+          text-align: center;
+          text-decoration: none;
+          transition: all 250ms;
+          border: 0;
+          font-size: 16px;
+          user-select: none;
+          -webkit-user-select: none;
+          touch-action: manipulation;
+        }
+
+        .button-33:hover {
+          box-shadow: rgba(44,187,99,.35) 0 -25px 18px -14px inset,rgba(44,187,99,.25) 0 1px 2px,rgba(44,187,99,.25) 0 2px 4px,rgba(44,187,99,.25) 0 4px 8px,rgba(44,187,99,.25) 0 8px 16px,rgba(44,187,99,.25) 0 16px 32px;
+          transform: scale(1.05) rotate(-1deg);
+        }
 
       upload-button {
         margin-top: 50px;
@@ -200,8 +233,14 @@
       .upload-button:hover {
         background-color: #1f8f6b;
       }
+
+      .heart-icon {
+        font-size: 35px;
+        color: rgb(139,0,139);
+        margin:100px; /* Adjust the margin as needed */
+      }
     </style>
-    <title>Admin Dashboard</title>
+    <title>User Dashboard</title>
   </head>
   <body>
     <div class="header">
@@ -216,8 +255,8 @@
         </div>
         <ul>
           <li>
-            <img src="static/dashboard.png" />
-            <p>Dashboard</p>
+            <img src="static/dashboard.png" /><a href="calorie">
+            <p>Calorie Tracker</p></a>
           </li>
           <li>
             <img src="static/reports.png" />
@@ -243,9 +282,9 @@
         </ul>
         <ul>
           <li>
-            <img src="static/logout.png" /><a href="{{ url_for('logout') }}"
-              ><p>Logout</p></a
-            >
+            <img src="static/logout.png" /><button class="button-33" role="button"><a href ="{{ url_for('logout') }}">Logout</a></button>
+
+
           </li>
         </ul>
       </div>
@@ -253,21 +292,31 @@
       <!-- Cards for Advertising, E-Commerce, and Analytics -->
       <div class="cards-container">
         <div class="card">
-          <a href="./dibpredict.html">predict</a>
           <p style="margin-bottom: 20px">Make Dibetics Prediction</p>
+          <span class="heart-icon"><i class="fa-solid fa-syringe"></i></span>
+          <button class="button-33" role="button"><a href ="./dibpredict.html"><i class="fa-solid fa-magnifying-glass"></i>  Predict</a></button>
+
         </div>
 
         <div class="card">
-          <a href="./b_cancer_model.html">Predict</a>
           <p stlye="margin-bottom: 20px">Make Breast Cancer Prediction</p>
+          <span class="heart-icon"><i class="fa-solid fa-disease"></i></span>
+
+          <button class="button-33" role="button"><a href ="./b_cancer_model.html"><i class="fa-solid fa-magnifying-glass"></i>  Predict</a></button>
+
         </div>
         <div class="card">
-          <a href="./hrt_disease.html">Predict</a>
           <p stlye="margin-bottom: 20px">Make Heart Disease Prediction</p>
+          <span class="heart-icon"><i class="fa-solid fa-heart-pulse"></i></span>
+          <button class="button-33" role="button"><a href ="./hrt_disease.html"><i class="fa-solid fa-magnifying-glass"></i>  Predict</a></button>
+
         </div>
         <div class="card">
-          <a href="./skincare">Reccomander</a>
           <p stlye="margin-bottom: 20px">Skin Crere Product Reccomandation</p>
+          <span class="heart-icon"><i class="fa-solid fa-face-smile"></i></span>
+
+          <button class="button-33" role="button"><a href ="./skincare"><i class="fa-solid fa-magnifying-glass"></i>  Reccomand</a></button>
+
         </div>
         
       </div>
@@ -276,6 +325,6 @@
       document.getElementById("clickMe").addEventListener("click", function () {
         window.open("/templates/dibpredict.html", "_self");
       });
-    </script> -->
+    </script>  -->
   </body>
 </html>

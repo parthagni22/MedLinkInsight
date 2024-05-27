@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/products">Products</a></li>
+            <li><a href="/cart">Cart</a></li>
+        </ul>
+    </nav>
+    <h1>Shopping Cart</h1>
+    
+    {% if cart %}
+        <div class="cart">
+            {% for item in cart %}
+                <div class="cart-item">
+                    <h2>{{ item['name'] }}</h2>
+                    <p>Price: ${{ item['price'] }}</p>
+                    <p>Quantity: {{ item['quantity'] }}</p>
+                    <p>Total Price: ${{ item['total_price'] }}</p>
+                    <form action="/remove_from_cart" method="post">
+                        <input type="hidden" name="product_id" value="{{ item['id'] }}">
+                        <button type="submit">Remove</button>
+                    </form>
+                    <br>
+                    <button type="=submit" role="botton"><a href ="payment">Buy</a></button>
+
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <h3>Your cart is empty. Please add products.</h3>
+    {% endif %}
+</body>
+</html>

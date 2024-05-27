@@ -35,7 +35,7 @@ window.onload = function () {
     const userID = Math.floor(Math.random() * 10000) + "";
     const userName = "userName" + userID;
     const appID = 1514446883;
-    const serverSecret = "1c0ec0a4bc30daa4de467f5acc74a1dcc";
+    const serverSecret = "c0ec0a4bc30daa4de467f5acc74a1dcc";
     const kitToken = ZegoUIKitPrebuilt.generateKitTokenForTest(appID, serverSecret, roomID, userID, userName);
 
     
@@ -50,8 +50,8 @@ window.onload = function () {
                 mode: ZegoUIKitPrebuilt.VideoConference,
             },
                 
-           	turnOnMicrophoneWhenJoining: false,
-           	turnOnCameraWhenJoining: false,
+           	turnOnMicrophoneWhenJoining: true,
+           	turnOnCameraWhenJoining: true,
            	showMyCameraToggleButton: true,
            	showMyMicrophoneToggleButton: true,
            	showAudioVideoSettingsButton: true,

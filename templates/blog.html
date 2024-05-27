@@ -20,7 +20,7 @@
         --Quicksand: "Quicksand", sans-serif;
         --Roboto: "Roboto", sans-serif;
         --dark: #3c393d;
-        --exDark: #2b2b2b;
+        
       }
 
       * {
@@ -384,7 +384,7 @@
     <header>
       <nav class="navbar">
         <div class="container">
-          <a href="index" class="navbar-brand">MedLinkeInsight</a>
+          <a href="./" class="navbar-brand">MedLinkeInsight</a>
           <div class="navbar-nav">
             <a href="">home</a>
             <a href="">design</a>
@@ -393,20 +393,6 @@
           </div>
         </div>
       </nav>
-      <div class="banner">
-        <div class="container">
-          {% for image in banner_images %}
-          <div class="banner-image">
-            <img src="{{ image.url }}" alt="{{ image.alt }}" />
-            <h1 class="banner-title">
-              <span>{{ image.title }}</span>
-            </h1>
-            <p>{{ image.description }}</p>
-          </div>
-          {% endfor %}
-
-        </div>
-      </div>
     </header>
     <!-- end of header -->
 
